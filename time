@@ -1,0 +1,38 @@
+const def = require('./config');
+
+const timezones = {
+    'GMT': 0,
+    'WAT': 1
+}
+
+// Format time adjust to timezone and log to console.
+function logTime(date) {
+    const UTCHour = date.getUTCHours();
+    const UTCMinute = date.getUTCMinutes();
+    const UTCSecond = date.getUTCSeconds();
+
+    //Format
+    let zonedUTCHour = UTCHour + (process.argv[2] || timezones[def]);
+    let hour = (zonedUTCHour > 12 ? zonedUTCHour - 12 : zonedUTCHour);
+    let minute = UTCMinute.toString().length === 1 ? '0' + UTCMinute.toString() : UTCMinute;
+    let second = UTCSecond;
+    let timeOfDay = (zonedUTCHour < 12 || zonedUTCHour === 24) ? 'AM' : 'PM';
+
+    // Log 
+    let UTCTime = `${hour}:${minute} ${timeOfDay}         ${second}s`;
+    console.log(UTCTime);
+}
+
+const time = new Date();
+logTime(time);
+
+/*
+// Include seconds count in log.
+
+let intervalID = setInterval(() => {
+    date = new Date
+    console.log(`                ${date.getUTCSeconds()}s`)
+}, 1000);
+
+setTimeout(() => clearInterval(intervalID), 3000);
+*/

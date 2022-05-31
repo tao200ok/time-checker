@@ -1,0 +1,3 @@
+const timezone = 'WAT'; // Write default time zone e.g WAT for West African Time.
+
+module.exports = timezone;
